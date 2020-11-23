@@ -4,6 +4,14 @@ class Mystyle {
   Color darkColor = Colors.blue.shade800;
   Color primaryColor = Colors.green.shade200;
 
+  Widget showprogress() {
+    return Center(
+      child: CircularProgressIndicator(
+
+      ),
+    );
+  }
+
   Container showlogo() {
     return Container(
       width: 120,

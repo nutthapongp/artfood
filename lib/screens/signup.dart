@@ -1,3 +1,4 @@
+import 'package:artfood/utility/my_Constant.dart';
 import 'package:artfood/utility/my_style.dart';
 import 'package:artfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
@@ -45,8 +46,9 @@ class _SignUpState extends State<SignUp> {
 
   Future<Null> registerThread() async {
     String url =
-        'http://192.168.1.39/artfood/adduser.php?isAdd=true&name=$name&username=$username&password=$password&role=$role';
+        '${MyConstant().domain}/artfoodapi/adduser.php?isAdd=true&name=$name&username=$username&password=$password&role=$role';
 
+    print(url);
     try {
       Response response = await Dio().get(url);
       if (response.toString() == 'true') {
@@ -54,16 +56,6 @@ class _SignUpState extends State<SignUp> {
       } else {
         normalDialog(context, "กรุณาลองสมัครใหม่อีกครั้ง");
       }
-      //.then((value) {
-      //   setState(() {
-      //     _controllersName.clear();
-      //     _controllersUserName.clear();
-      //     _controllersPassword.clear();
-      //     role = null;
-      //     print('value : $value');
-
-      //   });
-
     } catch (e) {
       print(e);
     }
@@ -71,11 +63,13 @@ class _SignUpState extends State<SignUp> {
 
   Future<Null> checkUser() async {
     String url =
-        'http://localhost/artfood/getUserWhereUser.php?isAdd=true&User=$username';
+        '${MyConstant().domain}/artfoodapi/getUserWhereUser.php?isAdd=true&username=$username';
 
+    print(url);
     try {
       Response response = await Dio().get(url);
-      if (response.toString() == 'null') {
+      print("?>>>>>>" + response.toString());
+      if (response.toString() == "null") {
         registerThread();
       } else {
         normalDialog(context, "username นี้ซ้ำแล้ว กรุณากรอกใหม่");
@@ -106,7 +100,6 @@ class _SignUpState extends State<SignUp> {
                 normalDialog(context, "กรุณาเลือก type");
               } else {
                 checkUser();
-                //registerThread();
               }
             },
             child: Text('Register'),

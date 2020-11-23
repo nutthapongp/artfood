@@ -4,6 +4,7 @@ import 'package:artfood/model/user_model.dart';
 import 'package:artfood/screens/main_rider.dart';
 import 'package:artfood/screens/main_shop.dart';
 import 'package:artfood/screens/main_user.dart';
+import 'package:artfood/utility/my_constant.dart';
 import 'package:artfood/utility/my_style.dart';
 import 'package:artfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
@@ -63,8 +64,9 @@ class _SignInState extends State<SignIn> {
 
   Future<Null> checkrole() async {
     String url =
-        'http://192.168.1.39/artfood/getUserWhereUser.php?isAdd=true&User=$username';
+        '${MyConstant().domain}/artfoodapi/getUserWhereUser.php?isAdd=true&username=$username';
 
+    print(url);
     try {
       Response response = await Dio().get(url);
       print('response : $response');
